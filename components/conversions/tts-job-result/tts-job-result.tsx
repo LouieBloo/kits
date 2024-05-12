@@ -6,20 +6,12 @@ import { cn } from '@/lib/utils';
 import { TtsJob } from "@/interfaces/voice-models";
 import { dateHowLongAgoParser, statusParser } from "@/services/parsing-service";
 import AudioPlayer from "@/components/audio/audio-player";
-import { publishEvent } from "@/services/event-service";
-import { IoMdRefresh } from "react-icons/io";
-
-
 
 interface TtsJobResultProps {
     ttsJob: TtsJob;
 }
 
 const TtsJobResult: React.FC<TtsJobResultProps> = ({ ttsJob }) => {
-
-    const refresh = () => {
-        publishEvent('ttsJobCreated', null);
-    }
 
     return (
         <div>
@@ -36,14 +28,6 @@ const TtsJobResult: React.FC<TtsJobResultProps> = ({ ttsJob }) => {
             {ttsJob.outputFileUrl && (
                 <div>
                     <AudioPlayer url={ttsJob.outputFileUrl} />
-                </div>
-            )}
-
-            {ttsJob.status == 'running' && (
-                <div className="flex items-center ml-1">
-                    <IoMdRefresh className="text-cyan-400"/>
-                    <button type="button" className="ml-1 text-cyan-400" onClick={refresh}>Refresh</button>
-                    
                 </div>
             )}
 

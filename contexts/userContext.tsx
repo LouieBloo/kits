@@ -19,7 +19,6 @@ export const UserProvider = ({ children }) => {
         token: ''
     });
 
-
     //normally this will hit the login endpoint, just return our hard coded token for the demo
     const login = (username:string) => {
         const fetchedToken = '_-b_bxeL.frYxt484gKwKNYksJt6xYjD5';
