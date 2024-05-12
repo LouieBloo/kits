@@ -25,14 +25,19 @@ export default function TextToSpeechConverter() {
     setError("");
     setStatus("");
 
-    await createTextToSpeechJob(selectedVoiceModelId, inputText).then((response) => {
-      publishEvent("ttsJobCreated", response.data);
-      setStatus("TTS job created successfully");
-    }).catch(error=>{
-      setError("Error creating tts job: " + error);
-    }).finally(() => {
+    if (selectedVoiceModelId !== undefined) {
+      await createTextToSpeechJob(selectedVoiceModelId, inputText).then((response) => {
+        publishEvent("ttsJobCreated", response.data);
+        setStatus("TTS job created successfully");
+      }).catch(error=>{
+        setError("Error creating tts job: " + error);
+      }).finally(() => {
+        setLoading(false);
+      });
+    } else {
+      setError("Please select a voice model");
       setLoading(false);
-    });
+    }
   }
 
   return (

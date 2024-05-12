@@ -1,4 +1,4 @@
-import { TtsJob } from "@/interfaces/voice-models";
+import { ApiResponse, TtsJob } from "@/interfaces/voice-models";
 import { getTtsJobs } from "@/services/api-service";
 import { get } from "http";
 import * as React from "react";
@@ -28,7 +28,7 @@ export default function ConversionOutputs() {
     setLoading(true);
     setError("");
 
-    await getTtsJobs().then((response) => {
+    await getTtsJobs().then((response: ApiResponse) => {
       if (response && response.data) {
         setJobs(response.data);
       }

@@ -15,12 +15,17 @@ export interface TtsJob {
     id?: number;
     createdAt?: Date;
     type?: string;
-    status?: string;
+    status: string;
     voiceModelId?: number;
-    jobStartTime?: string;
-    jobEndTime?: string;
+    jobStartTime?: Date;
+    jobEndTime?: Date;
     outputFileUrl?: string;
     lossyOutputFileUrl?: string;
     recombinedAudioFileUrl?: string | null;
     model?: VoiceModel;
+}
+
+export interface ApiResponse{
+    data?: any;
+    meta?:any;
 }

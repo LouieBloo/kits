@@ -1,7 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
-const UserContext = createContext(null);
+interface UserContextType {
+    user: {
+        username: string;
+        token: string;
+    };
+    login: (username: string) => boolean;
+    logout: () => void;
+    isAuthenticated: () => string | undefined;
+}
+
+const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState({
@@ -61,4 +71,10 @@ export const UserProvider = ({ children }) => {
     );
 };
 
-export const useUser = () => useContext(UserContext);
+export const useUser = () => {
+    const context = useContext(UserContext);
+    if (!context) {
+        throw new Error('useUser must be used within a UserProvider');
+    }
+    return context;
+};

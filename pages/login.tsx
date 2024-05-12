@@ -20,9 +20,9 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="container">
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                Login
+        <div className="container max-w-xl mt-10">
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-center">
+                Kits.ai
             </h1>
 
             <form onSubmit={handleSubmit}>

@@ -3,7 +3,7 @@ import { get } from "http";
 import * as React from "react";
 import { useEffect } from "react";
 import { cn } from '@/lib/utils';
-import { TtsJob } from "@/interfaces/tts-jobs";
+import { TtsJob } from "@/interfaces/voice-models";
 import { dateHowLongAgoParser, statusParser } from "@/services/parsing-service";
 import AudioPlayer from "@/components/audio/audio-player";
 import { publishEvent } from "@/services/event-service";

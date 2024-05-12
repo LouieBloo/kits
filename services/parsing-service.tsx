@@ -13,7 +13,7 @@ const statusParser = (status: string) => {
 
 //convert the date into a string telling us how many minutes ago it was. If it was longer than 1 hour show hours, 
 //if longer than a day show days
-const dateHowLongAgoParser = (date: Date) => {
+const dateHowLongAgoParser = (date: Date| null | undefined) => {
     if(!date) return "";
 
     const diff = new Date().getTime() - new Date(date).getTime();
