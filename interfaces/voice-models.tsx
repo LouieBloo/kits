@@ -10,3 +10,17 @@ export interface VoiceModel {
     spotifyLink?: string;
     youtubeLink?: string;
 }
+
+export interface TtsJob {
+    id?: number;
+    createdAt?: Date;
+    type?: string;
+    status?: string;
+    voiceModelId?: number;
+    jobStartTime?: string;
+    jobEndTime?: string;
+    outputFileUrl?: string;
+    lossyOutputFileUrl?: string;
+    recombinedAudioFileUrl?: string | null;
+    model?: VoiceModel;
+}

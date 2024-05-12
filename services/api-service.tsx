@@ -8,6 +8,10 @@ export const getVoiceModels = async () => {
     return await httpRequest('GET', '/voice-models').then((response) => { response = response.json(); return response; });
 }
 
+export const getTtsJobs = async () => {
+    return await httpRequest('GET', '/tts', {perPage: 5}).then((response) => { response = response.json(); return response; });
+}
+
 export const createTextToSpeechJob = async (voiceModelId: number, text: string) => {
     const formData  = new FormData();
       
@@ -23,18 +27,26 @@ const httpRequest = async (verb: string, url: string, payload?: any, multipart: 
 
     const headers = multipart ? {} : {
         'Content-Type': 'application/json'
+    };
+
+    let fullUrl = `${baseUrl}${url}`;
+
+    // Serialize payload into query parameters if it's a GET request
+    if (verb === 'GET' && payload) {
+        const queryParams = new URLSearchParams(payload).toString();
+        fullUrl += '?' + queryParams;
     }
 
-    return await fetch(`${baseUrl}${url}`, {
+    return await fetch(fullUrl, {
         method: verb,
         headers: {
             ...headers,
             'Authorization': `Bearer ${token}`
         },
-        body: multipart ? payload : JSON.stringify(payload)
+        body: verb !== 'GET' ? (multipart ? payload : JSON.stringify(payload)) : undefined
     }).catch((error) => {
         console.error("Http error for " + url + " endpoint:", error);
-        //dont swallow the error as our components should handle any messaging
+        // Don't swallow the error as our components should handle any messaging
         throw error;
-    })
+    });
 };

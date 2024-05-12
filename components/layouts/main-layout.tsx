@@ -6,10 +6,10 @@ export default function MainLayout({ children }) {
     const { user, logout } = useUser();
 
     return (
-        <div>
-            {user.isAuthenticated && (
-                <div className="flex justify-end">
-                    <h1>Welcome {user.username}!</h1>
+        <div className="pt-2">
+            {user.token && (
+                <div className="flex justify-end items-center">
+                    <h3 className="font-semibold text-lg mr-3">Welcome {user.username}!</h3>
                     <button onClick={logout} className="button-normal">Logout</button>
                 </div>
             )}

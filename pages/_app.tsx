@@ -19,14 +19,14 @@ export default function App({ Component, pageProps }: AppProps) {
 
 // If the user is not logged in we move them to the login page, else render the children like normal
 function AuthenticationRouter({ children }) {
-  const { user } = useUser();
+  const { user, isAuthenticated } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!user.isAuthenticated && router.pathname !== '/login') {
+    if (!isAuthenticated() && router.pathname !== '/login') {
       router.push('/login');
     }
-  }, [user.isAuthenticated, router]);
+  }, [user.token, router]);
 
   return <MainLayout>{children}</MainLayout>;
 }
